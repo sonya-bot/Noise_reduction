@@ -57,7 +57,7 @@ def draw_dashboard(audio_files, input_path, output_path, fig_size, auto_save):
     total_width = fig_size[0] * n_cols
     total_height = fig_size[1] * n_rows
     
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(total_width, total_height))
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(total_width, total_height), layout='constrained')
     
     # ファイル数が1つの場合など、axesが配列にならないケースの対策
     if n_plots == 1:
@@ -90,11 +90,11 @@ def draw_dashboard(audio_files, input_path, output_path, fig_size, auto_save):
         cbar.set_label('Amplitude [dB]')
 
     plt.suptitle("STFT Spectrum", fontsize=18)
-    plt.tight_layout()
-    plt.subplots_adjust(wspace=0.3, hspace=0.5)
+    # plt.tight_layout()
+    # plt.subplots_adjust(wspace=0.3, hspace=0.5)
 
     if auto_save:
-        save_path = os.path.join(output_path, "Dashboard_STFT.png")
+        save_path = os.path.join(output_path, "Visualize_STFT.png")
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"ダッシュボード保存完了: {save_path}")
         plt.close()
@@ -133,12 +133,12 @@ def visualize_fft(file_path, output_path, fig_size, auto_save):
 # メイン処理
 if __name__ == "__main__":
     # フォルダパスを入力
-    INPUT_PATH = "/Users/Souma/Develop/Python/noise_reduction/test"
-    OUTPUT_PATH = INPUT_PATH
+    INPUT_PATH = "/Users/Souma/Develop/exp_data/recording_data/processed_data/scene_4"
+    OUTPUT_PATH = "/Users/Souma/Develop/exp_data/recording_data/"
 
     # パラメータ設定
     FIG_SIZE = (6, 4)
-    AUTO_SAVE = False
+    AUTO_SAVE = True
     
     if not os.path.isdir(INPUT_PATH):
         print(f"エラー: '{INPUT_PATH}' は有効なフォルダパスではありません。")
